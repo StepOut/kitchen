@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="./jquery.datetimepicker.css"/>
+<style type="text/css">
+.custom-date-style {
+	background-color: red !important;
+}
+#datetimepicker3 {
+	display: none !important;
+}
+</style>
+</head>
+<body>
+<!--<div id="console" style="background-color:#fff;color:red">sdfdsfsdf</div>-->
+<input type="text" id="datetimepicker3"/>
+<br>
+<br>
+<input type="button" id="btn1" value="Check">
+<script type="text/javascript">
+		
+	</script>
+</body>
+<script src="./jquery.js"></script>
+<script src="./jquery.datetimepicker.js"></script>
+<script>/*
+window.onerror = function(errorMsg) {
+	$('#console').html($('#console').html()+'<br>'+errorMsg)
+}*/
+
+
+var bueno_date1 = new Date();
+var bueno_date1 = bueno_date1.getDate()+1;
+var bueno_month1 = new Date();
+var bueno_month1 = bueno_month1.getMonth();
+var bueno_hours1 = new Date();
+var bueno_hours1 = bueno_hours1.getHours();
+var bueno_year1 = new Date();
+var bueno_year1 = bueno_year1.getYear();
+
+var logic = function( currentDateTime ){
+	if( currentDateTime.getDate()==bueno_date1 && currentDateTime.getMonth()==bueno_month1 ){
+		this.setOptions({
+			minTime: bueno_hours1+':00'
+		});
+	}else
+		this.setOptions({
+			minTime:'0:00'
+		});
+	
+};
+var logic2 = function( currentDateTime ){
+	if( currentDateTime.getDate()==bueno_date1){
+		
+		for(var i = 1; i<23; i++){
+			//var data_hour = $(".xdsoft_time_box .xdsoft_time").eq('5').data('hour');
+			if(i <= bueno_hours1){
+				$(".xdsoft_time_box .xdsoft_time").eq(i-1).hide();
+			}
+		}
+		alert(data_hour);
+	}
+	//$("#datetimepicker3").val(null);
+};
+var logic4 = function( currentDateTime ){
+	//currentDateTime.getYear()+'/'+currentDateTime.getMonth()+'/'+currentDateTime.getDate();
+	$("#datetimepicker3").val(null);
+	//window.location.hash= '#datetimepicker3';
+    //$("#datetimepicker3").val(currentDateTime.getFullYear()+'/'+currentDateTime.getMonth()+1+'/'+currentDateTime.getDate()+' '+bueno_hours1+':00');
+	//$('body').focus();	
+}
+
+$('#datetimepicker3').datetimepicker({
+	inline: true,
+	minDate: '-1969/12/31',
+	startDate: '2015/01/'+bueno_date1,
+	onGenerate: logic2,
+	onChangeDateTime:logic,
+	onShow: logic,
+	onSelectDate: logic4	
+});
+
+$(document).on("click", ".xdsoft_calendar",
+	function(e){
+		alert("hi");
+	}
+);
+
+
+		$("#btn1").click(function(e) {
+			var val1 = $("#datetimepicker3").val();
+            alert(val1);
+        });
+
+</script>
+</html>
